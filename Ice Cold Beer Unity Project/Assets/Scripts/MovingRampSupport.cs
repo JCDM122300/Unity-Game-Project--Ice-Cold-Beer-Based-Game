@@ -3,73 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingRampSupport : MonoBehaviour
-{
+{    public float moveSpeed = 1f;
+    private Rigidbody2D rigidBody;  //when making the variable, name it the same as the class but lowercase
+    private float verticalInput;
+
+
+
+
+
+    //private SpriteRenderer spriteRenderer;
+
+    //everything found in the components in unity can be accessed here in VS
+
+
     //created the variable for movement speed
     //variables are useful for replacing numbers with words which essentially makes your code easier to read.
-    private float moveSpeed = 0.1f;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Smoke Weed Everyday (This is a log test)");
-        //transform.Translate(5,0,0);
+        //spriteRenderer = GetComponent<SpriteRenderer>();
+        /*if (Input.GetKeyDown(KeyCode.Space))
+        {
+            spriteRenderer.color = Color.green;
+        } */
+
+        //if you use Input.GetKey, you would not be able to remap the controls so the player can change to their liking.
+
+        rigidBody = GetComponent<Rigidbody2D>(); //this finds the exact component that we need to reference  //also everything here and in unity have a connection
+        
+        
+        
     }
 
-    // Update is called once per frame
-    void Update()
+
+    //used fixed update for physics code, because we need to be careful about how often we call expensive, hardware intensive, physics stuff
+    private void FixedUpdate()
     {
-        //if the player presses the up arrow, the square will then move up the specified distance every frame until the button is released
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(0, moveSpeed, 0);
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(0, -1 * moveSpeed, 0);
-        }
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Translate(-1 * moveSpeed, 0, 0);
-        }
-
-        if (Input.GetKey(KeyCode.RightArrow)) 
-        {
-            transform.Translate(moveSpeed, 0, 0);
-        }
-
-        //Controls for WASD
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(0, moveSpeed, 0);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(0, -1 * moveSpeed, 0);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(-1 * moveSpeed, 0, 0);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(moveSpeed, 0, 0);
-        }
-
-
-
-
-
-
-
-
-
-
-        //Debug.Log("UPDATE METHOD");
-        //transform.Translate(0.1f, 0, 0);
+       verticalInput = Input.GetAxis("Vertical"); //stored verticalInput with how far the player tilts the control stick vertically
+        //using this input from the project settings allows for easier configuration for the controls. On an even better side, the default controls are already mapped out in Unity
+        //It also allows us to deal with analog control with sticks as well. (tells us how far it is being tilted)
+        rigidBody.velocity = new Vector2(0, verticalInput * moveSpeed); //this puts a cap on how fast the player moves (?)
 
     }
+
+
 }
