@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovingRampSupport : MonoBehaviour
 {    public float moveSpeed = 1f;
+    public string inputAxis;
     private Rigidbody2D rigidBody;  //when making the variable, name it the same as the class but lowercase
     private float verticalInput;
 
@@ -40,11 +41,16 @@ public class MovingRampSupport : MonoBehaviour
     //used fixed update for physics code, because we need to be careful about how often we call expensive, hardware intensive, physics stuff
     private void FixedUpdate()
     {
-       verticalInput = Input.GetAxis("Vertical"); //stored verticalInput with how far the player tilts the control stick vertically
-        //using this input from the project settings allows for easier configuration for the controls. On an even better side, the default controls are already mapped out in Unity
-        //It also allows us to deal with analog control with sticks as well. (tells us how far it is being tilted)
+       
         rigidBody.velocity = new Vector2(0, verticalInput * moveSpeed); //this puts a cap on how fast the player moves (?)
 
+    }
+
+    private void Update()
+    {
+        verticalInput = Input.GetAxis(inputAxis); //stored verticalInput with how far the player tilts the control stick vertically
+        //using this input from the project settings allows for easier configuration for the controls. On an even better side, the default controls are already mapped out in Unity
+        //It also allows us to deal with analog control with sticks as well. (tells us how far it is being tilted)
     }
 
 
