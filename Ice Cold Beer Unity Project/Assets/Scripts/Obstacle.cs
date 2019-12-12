@@ -16,6 +16,7 @@ public class Obstacle : MonoBehaviour
         Debug.Log("Oooooo you touched my tralala");
         if (collision.tag == "Player" && !GameOver.IsGameOver)
         {
+            
             GameOverText.SetActive(true);
             //cue sound effect here
             audioSource.Play();
