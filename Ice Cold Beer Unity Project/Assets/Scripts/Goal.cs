@@ -22,6 +22,7 @@ public class Goal : MonoBehaviour
             //cue sound effect here
             audioSource.Play();
             Debug.Log("Yaaaaaaaay, you touched the goal");
+            GameOver.IsGameOver = true;
         } 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MovingRampSupport : MonoBehaviour
@@ -44,8 +45,16 @@ public class MovingRampSupport : MonoBehaviour
       if (!GameOver.IsGameOver)
         {
              rigidBody.velocity = new Vector2(0, verticalInput * moveSpeed); //this puts a cap on how fast the player moves (?)
-        } 
 
+        } 
+      else
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("GameScene");
+                GameOver.IsGameOver = false;
+            }
+        }
     }
 
     private void Update()
