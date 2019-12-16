@@ -5,4 +5,7 @@ using UnityEngine;
 public class GameOver 
 {
     public static bool IsGameOver = false;
+
+    
+
 }

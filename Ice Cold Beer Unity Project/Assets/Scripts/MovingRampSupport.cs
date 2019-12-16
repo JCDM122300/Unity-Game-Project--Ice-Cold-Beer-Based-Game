@@ -48,13 +48,19 @@ public class MovingRampSupport : MonoBehaviour
 
         } 
       else
-        {
+      {
             if (Input.GetKeyDown(KeyCode.R))
             {
                 SceneManager.LoadScene("GameScene");
                 GameOver.IsGameOver = false;
             }
-        }
+            rigidBody.velocity = new Vector2(0, 0);
+      }
+      
+        
+        
+         
+        
     }
 
     private void Update()
